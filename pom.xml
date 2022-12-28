@@ -8,9 +8,12 @@
 		<version>3.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.example</groupId>
 	<artifactId>AroundHub</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
 	<name>AroundHub</name>
 	<description>AroundHub</description>
 	<properties>
