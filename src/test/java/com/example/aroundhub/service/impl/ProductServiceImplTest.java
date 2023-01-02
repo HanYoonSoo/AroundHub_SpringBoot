@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.mockito.Mockito.verify;
-
+//Client Secret = uREA35N6s7
 //@SpringBootTest(classes = {ProductDataHandlerImpl.class, ProductServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 @Import({ProductDataHandlerImpl.class, ProductServiceImpl.class})

@@ -32,9 +32,9 @@ public class GetController {
     // http://localhost:8080/api/v1/get-api/request1?name=yoonsoo&email=cya0405@naver.com&organization=yesin
     @GetMapping("/request1")
     public String getRequestParam1(
-        @RequestParam String name,
-        @RequestParam String email,
-        @RequestParam String organization){
+        String name,
+        String email,
+        String organization){
         return name + " " + email + " " + organization;
     }
 
