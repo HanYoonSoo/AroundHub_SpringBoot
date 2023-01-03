@@ -3,9 +3,7 @@ package com.example.aroundhub.data.entity;
 import com.example.aroundhub.data.dto.ProductDto;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -13,8 +11,9 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "product")
-public class ProductEntity {
+public class ProductEntity extends BaseEntity{
 
     @Id
     String productId;
