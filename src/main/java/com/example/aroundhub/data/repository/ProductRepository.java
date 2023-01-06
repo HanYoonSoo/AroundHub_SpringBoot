@@ -1,7 +1,11 @@
 package com.example.aroundhub.data.repository;
 
 import com.example.aroundhub.data.entity.ProductEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -53,4 +57,40 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
 
     // (Is)Like, (Is)Containing, (Is)StartingWith, (Is)EndingWith
     List<ProductEntity> findByProductNameContaining(String name);
+
+    // Asc: 오름차순, Desc : 내림차순
+    List<ProductEntity> findByProductNameContainingOrderByProductStockAsc(String name);
+    List<ProductEntity> findByProductNameContainingOrderByProductStockDesc(String name);
+
+    // 여러 정렬 기준 사용
+    List<ProductEntity> findByProductNameContainingOrderByProductPriceAscProductStockDesc(String name);
+
+    // 매개변수를 활용한 정렬
+    List<ProductEntity> findByProductNameContaining(String name, Sort sort);
+
+    // 페이징 처리하기
+    List<ProductEntity> findByProductPriceGreaterThan(Integer price, Pageable pageable);
+
+    /* Query 사용하기 */
+
+    @Query("SELECT p FROM ProductEntity p WHERE p.productPrice > 2000")
+    List<ProductEntity> findByPriceBasis();
+
+    @Query(value = "SELECT * FROM product WHERE product_price > 2000", nativeQuery = true)
+    List<ProductEntity> findByPriceBasisNativeQuery();
+
+    @Query("SELECT p FROM ProductEntity p WHERE p.productPrice > ?1")
+    List<ProductEntity> findByPriceWithParameter(Integer price);
+
+    @Query("SELECT p FROM ProductEntity p WHERE p.productPrice > :price")
+    List<ProductEntity> findByPriceWithParameterNaming(Integer price);
+
+    @Query("SELECT p FROM ProductEntity p WHERE p.productPrice > :pri")
+    List<ProductEntity> findByPriceWithParameterNaming2(@Param("pri") Integer price);
+
+    @Query(value = "SELECT * FROM product WHERE product_price > :price",
+    countQuery = "SELECT count(*) FROM product WHERE product_price > ?1",
+    nativeQuery = true)
+    List<ProductEntity> findByPriceWithParameterPaging(Integer price, Pageable pageable);
+
 }
